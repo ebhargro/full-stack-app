@@ -20,16 +20,16 @@ export default class Courses extends Component {
         })
     }
 
-    // render() {
-    //         return (
-    //             <div>
-    //             <h1>View All Courses</h1>
-    //             {this.state.courses.map(course => 
-    //             <Link key={course.id} to={`/courses/${course.id}`}>
-    //             <h2> {course.title} </h2>
-    //                 </Link>
-    //             )}
-    //               </div>
-    //           );
-    //     }
+    render() {
+            return (
+                <div>
+                <h1>View All Courses</h1>
+                {this.state.courses.map(course => 
+                <Link key={course.id} to={`/courses/${course.id}`}>
+                <h2> {course.title} </h2>
+                    </Link>
+                )}
+                  </div>
+              );
+        }
     }
