@@ -26,7 +26,8 @@ export default class CourseDetail extends Component {
     render() {
         const {course, user} = this.state;
         //If the user is the owner of the course, allow access
-        const authUser = this.props.authenticatedUser;
+        const { context } = this.props
+        const authUser = context.authenticatedUser;
         return(
             <React.Fragment>
                 <div className="actions--bar">
@@ -37,11 +38,11 @@ export default class CourseDetail extends Component {
                         <React.Fragment>
                             <Link className="button" to={`/courses/${course.id}/update`}> Update Course </Link>
                             <Link className="button" to={`/courses/${course.id}/delete`}> Delete Course </Link>
-                            <Link className="button" to={"/"}> Back </Link>
+                            <Link className="button" to="/"> Back </Link>
                         </React.Fragment>
                         :
                         <React.Fragment>
-                            <Link className="button" to={"/"}> Back </Link>
+                            <Link className="button" to="/"> Back </Link>
                         </React.Fragment>
                         }
                     </div>
