@@ -43,7 +43,7 @@ export default class CreateCourse extends Component {
                       </label>
                       <p> By {authUser.firstName} {authUser.lastName} </p>
                     <label> Description 
-                    <input 
+                    <textarea 
                       id="description" 
                       name="description"
                       type="text"
@@ -61,7 +61,7 @@ export default class CreateCourse extends Component {
                       placeholder="Estimated Time" />    
                       </label>
                       <label> Materials Needed 
-                    <input 
+                    <textarea 
                       id="materialsNeeded" 
                       name="materialsNeeded"
                       type="text"
@@ -90,16 +90,17 @@ export default class CreateCourse extends Component {
         const { context } = this.props;
         const { from } = this.props.location.state || { from: { pathname: '/' } };
         const authUser = context.authenticatedUser;
-        const authId = authUser.id;
+        const userId = authUser.userId;
         const { title, description, estimatedTime, materialsNeeded, } = this.state;
-        const course = { title, description, estimatedTime, materialsNeeded, authId };
+        const course = { title, description, estimatedTime, materialsNeeded, userId };
     
-        context.actions.createCourse(course, authUser.emailAddress, authUser.password)
+        console.log(authUser);
+
+        context.data.createCourse(course, authUser.emailAddress, authUser.password)
           .then((user) => {
-            if (user === null) {
-              this.setState(() => {
-                return { errors: [ 'Sorry, access denied.' ] };
-              });
+            console.log(user);
+            if (user.length) {
+              this.setState({ errors: user });
             } else {
               this.props.history.push(from);
               console.log(`Hooray! Course created.`)

@@ -28,7 +28,7 @@ router.get('/', authenticateUser, asyncHandler(async(req, res) => {
         firstName: user.firstName,
         lastName: user.lastName,
         emailAddress: user.emailAddress,
-        userId: user.userId
+        userId: user.id
     });
     res.status(200);
   }));

@@ -9,7 +9,34 @@ export default class UpdateCourse extends Component {
         materialsNeeded: '',
         errors: [],
         user: {},
-      }
+        id: ''
+      };
+
+    componentDidMount(){
+      const {context} = this.props;
+      const authUser = context.authenticatedUser;
+      const id = this.props.match.params.id;
+
+      context.data.getCourse(id)
+        .then((course) => {
+          console.log(id);
+          this.setState({
+            title: course.title,
+            description: course.description,
+            materialsNeeded: course.materialsNeeded,
+            estimatedTime: course.estimatedTime,
+            user: course.User
+          })
+          if (authUser.id) {
+            this.props.history.push('/notfound');
+          }
+        })
+        .catch(error => {
+          this.props.history.push('/error');
+          console.log(`Error: unable to retrieve course ${error}.`)
+        })
+    }
+    
     
       render() {
         const {
@@ -90,21 +117,21 @@ export default class UpdateCourse extends Component {
     
       submit = () => {
         const { context } = this.props;
-        const { from } = this.props.location.state || { from: { pathname: '/' } };
         const authUser = context.authenticatedUser;
-        const authId = authUser.id;
+        const userId = authUser.userId;
         const { title, description, estimatedTime, materialsNeeded, } = this.state;
-        const course = { title, description, estimatedTime, materialsNeeded, authId };
+        const id = this.props.match.params.id;
+        const course = { title, description, estimatedTime, materialsNeeded, userId };
     
-        context.actions.createCourse(course, authUser.emailAddress, authUser.password)
-          .then((user) => {
-            if (user === null) {
-              this.setState(() => {
-                return { errors: [ 'Sorry, access denied.' ] };
-              });
+        context.data.updateCourse(id, course, authUser.emailAddress, authUser.password)
+          .then(errors => {
+            console.log(id);
+            if (errors) {
+              this.setState({errors});
             } else {
-              this.props.history.push(from);
-              console.log(`Hooray! Course created.`)
+              const id = this.props.match.params.id;
+              this.props.history.push(`/courses/${id}`);
+              console.log('Hooray! Course updated.')
             }
           })
           .catch((error) => {
@@ -114,6 +141,7 @@ export default class UpdateCourse extends Component {
       }
     
       cancel = () => {
-        this.props.history.push('/');
+        const id = this.props.match.params.id;
+        this.props.history.push(`/courses/${id}`);
       }
     }

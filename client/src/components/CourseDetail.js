@@ -26,20 +26,22 @@ export default class CourseDetail extends Component {
     render() {
         const {course, user} = this.state;
         //If the user is the owner of the course, allow access
-        const { context } = this.props
+        const { context } = this.props;
         const authUser = context.authenticatedUser;
         return(
             <React.Fragment>
                 <div className="actions--bar">
                     <div className="wrap">
                         {
-                            ( authUser && course.userId === authUser.id)
+                            //if the user is authorized, display "Update", "Delete", and "Back" buttons
+                            (authUser)
                         ?
                         <React.Fragment>
                             <Link className="button" to={`/courses/${course.id}/update`}> Update Course </Link>
-                            <Link className="button" to={`/courses/${course.id}/delete`}> Delete Course </Link>
+                            <Link className="button" to="/" onClick={() => this.deleteCourse()}> Delete Course </Link>
                             <Link className="button" to="/"> Back </Link>
                         </React.Fragment>
+                        // if user is not authorized, display only "Back" button
                         :
                         <React.Fragment>
                             <Link className="button" to="/"> Back </Link>
@@ -75,4 +77,24 @@ export default class CourseDetail extends Component {
             </React.Fragment>
         )
     }
+    deleteCourse = () => {
+        const {context} = this.props;
+        const authUser = context.authenticatedUser;
+        const id = this.props.match.params.id;
+        context.data.deleteCourse(id, authUser.emailAddress, authUser.password)
+        .then(errors => {
+            if(errors){
+                this.setState({errors})
+            } else {
+                console.log('Hooray! Course deleted.');
+                this.props.history.push('/');
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            this.props.history.push('/error');
+        })
+    }
+
+
     }
