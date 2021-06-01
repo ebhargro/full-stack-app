@@ -3,6 +3,7 @@ import config from './config';
 export default class Data {
   api(path, method = 'GET', body = null, requiresAuth = false, credentials = null) {
     const url = config.apiBaseUrl + path;
+
   
     const options = {
       method,
@@ -22,7 +23,7 @@ export default class Data {
     return fetch(url, options);
   }
 /**
-   * COURSE FUNCTIONS
+   * USER FUNCTIONS
    */
 
 //getUser function 

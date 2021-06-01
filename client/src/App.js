@@ -1,3 +1,8 @@
+//Treehouse Techdegree Unit 10 Project
+// Ebony Hargro
+// Aiming for: Meets Expectations
+// import statements for all components and modules
+
 import './App.css';
 import React from 'react';
 import {

@@ -79,7 +79,7 @@ export default class UserSignUp extends Component {
       password,
     } = this.state;
 
-    // Create user
+    // Create user if no errors exist 
     const user = {
       name,
       emailAddress,
@@ -102,8 +102,9 @@ export default class UserSignUp extends Component {
         this.props.history.push('/error');
       });
   
+      
   }
-
+//Return to list of courses when cancel button is clicked
   cancel = () => {
    this.props.history.push('/');
   }

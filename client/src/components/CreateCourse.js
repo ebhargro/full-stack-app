@@ -2,13 +2,14 @@ import React, {Component} from 'react';
 import Form from './Form';
 
 export default class CreateCourse extends Component {
-    state = {
+    state = {  
         title: '',
         description: '',
         estimatedTime: '',
         materialsNeeded: '',
         errors: []
       }
+    // Referenced this post for help understanding inputs: https://stackoverflow.com/questions/37427508/react-changing-an-uncontrolled-input
     
       render() {
         const {
@@ -25,6 +26,9 @@ export default class CreateCourse extends Component {
         return (
           <div className="wrap">
               <h1>Create A Course</h1>
+              {/* <div className="validation--errors">
+                <h3> Validation Errors </h3>
+              </div> */}
               <Form 
                 cancel={this.cancel}
                 errors={errors}
@@ -32,6 +36,7 @@ export default class CreateCourse extends Component {
                 submitButtonText="Create Course"
                 elements={() => (
                   <React.Fragment>
+                  <div className="main--flex">
                   <label> Course Title
                     <input 
                       id="title" 
@@ -68,7 +73,8 @@ export default class CreateCourse extends Component {
                       value={materialsNeeded} 
                       onChange={this.change} 
                       placeholder="Materials Needed" />    
-                      </label>                  
+                      </label>                   
+                  </div>
                   </React.Fragment>
                 )} />
             </div>
@@ -85,7 +91,7 @@ export default class CreateCourse extends Component {
           };
         });
       }
-    
+  // creates a course for authorized users, redirects to error page if unauthorized
       submit = () => {
         const { context } = this.props;
         const { from } = this.props.location.state || { from: { pathname: '/' } };
@@ -111,7 +117,7 @@ export default class CreateCourse extends Component {
             this.props.history.push('/error');
           });
       }
-    
+  //returns to list of courses when cancelled
       cancel = () => {
         this.props.history.push('/');
       }

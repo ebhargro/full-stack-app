@@ -9,6 +9,8 @@ export default class CourseDetail extends Component {
         user: {}
     };
 //Using Axios to get course data and user data
+// Referenced this article for help understanding how to set up fetch request: https://www.smashingmagazine.com/2020/06/rest-api-react-fetch-axios/
+
     componentDidMount(){
         Axios.get(`http://localhost:5000/api/courses/${this.props.match.params.id}`)
         .then(response => {
@@ -23,6 +25,8 @@ export default class CourseDetail extends Component {
             this.props.history.push('/notfound');
         })
     }
+
+   // Render course details and offers either full access to edit/delete courses or the ability to navigate back to the course list  
     render() {
         const {course, user} = this.state;
         //If the user is the owner of the course, allow access
@@ -33,30 +37,30 @@ export default class CourseDetail extends Component {
                 <div className="actions--bar">
                     <div className="wrap">
                         {
-                            //if the user is authorized, display "Update", "Delete", and "Back" buttons
+                            //if the user is authorized, display "Update", "Delete", and "Return to List" buttons
                             (authUser)
                         ?
                         <React.Fragment>
                             <Link className="button" to={`/courses/${course.id}/update`}> Update Course </Link>
                             <Link className="button" to="/" onClick={() => this.deleteCourse()}> Delete Course </Link>
-                            <Link className="button" to="/"> Back </Link>
+                            <Link className="button button-secondary" to="/"> Return to List </Link>
                         </React.Fragment>
                         // if user is not authorized, display only "Back" button
                         :
                         <React.Fragment>
-                            <Link className="button" to="/"> Back </Link>
+                            <Link className="button" to="/"> Return to List </Link>
                         </React.Fragment>
                         }
                     </div>
                 </div>
-                <div>
+                <div className="wrap">
                     <h2> Course Detail </h2>
                     <div>
-                        <h3>Course</h3>
-                        <h1>{course.title}</h1>
+                        <h3 className="course--detail--title" >Course</h3>
+                        <h4 className="course--name">{course.title}</h4>
                         <p> By {user.firstName} {user.lastName} </p>
                         <ReactMarkdown children={course.description}/>
-                        <p> Estimated Time </p>
+                        <h3 className="course--detail--title"> Estimated Time </h3>
                         {
                             (course.estimatedTime === null || course.estimatedTime === '')
                         ?
@@ -64,7 +68,7 @@ export default class CourseDetail extends Component {
                         :
                         <p> {course.estimatedTime} </p>
                         }
-                        <p> Materials Needed </p>
+                        <h3 className="course--detail--title"> Materials Needed </h3>
                         {
                             (course.materialsNeeded === null || course.materialsNeeded === '')
                         ?
@@ -77,6 +81,7 @@ export default class CourseDetail extends Component {
             </React.Fragment>
         )
     }
+    //authenticated user can delete a course using deleteCourse
     deleteCourse = () => {
         const {context} = this.props;
         const authUser = context.authenticatedUser;
@@ -92,7 +97,7 @@ export default class CourseDetail extends Component {
         })
         .catch(error => {
             console.log(error);
-            this.props.history.push('/error');
+            this.props.history.push('/error'); // sends user to "Error" page
         })
     }
 

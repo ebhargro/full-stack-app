@@ -7,6 +7,10 @@ export default class Courses extends Component {
         courses: [],
     };
 
+//Retrieve data from API port, redirect to error page if unsuccessful
+
+// Referenced this article for help understanding how to set up fetch request: https://www.smashingmagazine.com/2020/06/rest-api-react-fetch-axios/
+
     componentDidMount(){
         Axios.get('http://localhost:5000/api/courses')
         .then(response => {
@@ -19,7 +23,7 @@ export default class Courses extends Component {
             this.props.history.push('/error');
         })
     }
-
+//Render list of courses from API
     render() {
             return (
                 <div>
