@@ -29,9 +29,12 @@ export default class Data {
 //getUser function 
   async getUser(emailAddress, password) {
     const response = await this.api('/users', 'GET', null, true, { emailAddress, password });
+
+    // if the status response code indicates that the request is successful the data is returned
     if (response.status === 200) {
       return response.json().then(data => data);
     }
+    // if the status response code indicates that the request lacks valid authentication credentials, null is returned
     else if (response.status === 401) {
       return null;
     }
@@ -42,9 +45,11 @@ export default class Data {
 //createUser function
   async createUser(user) {
     const response = await this.api('/users', 'POST', user);
+    //tests if response code indicates that the request has successed and created a new user
     if (response.status === 201) {
       return [];
-    }
+    } 
+    // tests if responde code indicates that the server cannot process the request and returns an error
     else if (response.status === 400) {
       return response.json().then(data => {
         return data.errors;
@@ -62,9 +67,11 @@ export default class Data {
 //createCourse function
   async createCourse(course, emailAddress, password) {
     const response = await this.api('/courses', 'POST', course, true, {emailAddress, password});
+     //tests if response code indicates that the request has successed and created a new user
     if (response.status === 201) {
       return [];
     }
+    // tests if responde code indicates that the server cannot process the request and returns an error
     else if (response.status === 400) {
       return response.json().then(data => {
         return data.errors;
@@ -78,8 +85,10 @@ export default class Data {
   async getCourse(id){
     const response = await this.api(`/courses/${id}`, 'GET', null);
     console.log(id);
+    // if the status response code indicates that the request is successful the data is returned
     if (response.status === 200) {
       return response.json().then(data => data);
+      // if the status response code indicates that the request lacks valid authentication credentials, null is returned
     } else if (response.status === 401) {
       return null;
     }
@@ -91,9 +100,11 @@ export default class Data {
 //updateCourse function 
   async updateCourse(course, id, emailAddress, password) {
     const response = await this.api(`/courses/${id}`, 'PUT', course, true, {emailAddress, password});
+    //tests if the server has fulfilled the request and if there is a No Content response indicating that the page does not need to be replaced
     if (response.status === 204) {
       return [];
     }
+    // tests if responde code indicates that the server cannot process the request and returns an error
     else if (response.status === 400) {
       return response.json().then(data => {
         return data.errors;
@@ -107,9 +118,11 @@ export default class Data {
 //deleteCourse function 
   async deleteCourse(id, emailAddress, password) {
     const response = await this.api(`/courses/${id}`, 'DELETE', null, true, {emailAddress, password});
+    //tests if the server has fulfilled the request and if there is a No Content response indicating that the page does not need to be replaced
     if (response.status === 204) {
       return [];
     }
+    // tests if responde code indicates that the server cannot process the request and returns an error
     else if (response.status === 400) {
       return response.json().then(data => {
         return data.errors;
@@ -119,7 +132,6 @@ export default class Data {
       throw new Error();
     }
   }
-
 
   }
 
