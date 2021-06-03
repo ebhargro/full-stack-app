@@ -84,7 +84,7 @@ export default class Data {
 //getCourse funciton 
   async getCourse(id){
     const response = await this.api(`/courses/${id}`, 'GET', null);
-    console.log(id);
+    // console.log(id);
     // if the status response code indicates that the request is successful the data is returned
     if (response.status === 200) {
       return response.json().then(data => data);
@@ -98,7 +98,7 @@ export default class Data {
     }
 
 //updateCourse function 
-  async updateCourse(course, id, emailAddress, password) {
+  async updateCourse(id, course, emailAddress, password) {
     const response = await this.api(`/courses/${id}`, 'PUT', course, true, {emailAddress, password});
     //tests if the server has fulfilled the request and if there is a No Content response indicating that the page does not need to be replaced
     if (response.status === 204) {

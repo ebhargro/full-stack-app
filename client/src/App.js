@@ -21,6 +21,7 @@ import CourseDetail from './components/CourseDetail';
 import CreateCourse from './components/CreateCourse';
 import UpdateCourse from './components/UpdateCourse';
 import ErrorPage from './components/ErrorPage';
+import Forbidden from './components/Forbidden';
 
 
 import withContext from './Context';
@@ -50,6 +51,7 @@ export default () => (
         <Route path="/notfound" component={NotFound} /> 
         <Route path="/signout" component={UserSignOutWithContext} />
         <Route path="/error" component={ErrorPage} />
+        <Route path="/forbidden" component={Forbidden} />
       </Switch>
     </div>
   </Router>

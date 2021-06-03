@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Axios from 'axios';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
@@ -12,7 +12,7 @@ export default class CourseDetail extends Component {
 // Referenced this article for help understanding how to set up fetch request: https://www.smashingmagazine.com/2020/06/rest-api-react-fetch-axios/
 
     componentDidMount(){
-        Axios.get(`http://localhost:5000/api/courses/${this.props.match.params.id}`)
+        axios.get(`http://localhost:5000/api/courses/${this.props.match.params.id}`)
         .then(response => {
             this.setState({
                 course: response.data,
@@ -30,7 +30,7 @@ export default class CourseDetail extends Component {
     render() {
         const {course, user} = this.state;
         //If the user is the owner of the course, allow access
-        const { context } = this.props;
+        const context  = this.props.context;
         const authUser = context.authenticatedUser;
         return(
             <React.Fragment>
@@ -92,12 +92,12 @@ export default class CourseDetail extends Component {
                 this.setState({errors})
             } else {
                 console.log('Hooray! Course deleted.');
-                this.props.history.push('/');
+                this.props.history.push('/'); // returns user to Course list page
             }
         })
         .catch(error => {
             console.log(error);
-            this.props.history.push('/error'); // sends user to "Error" page
+            this.props.history.push('/forbidden'); // sends user to "Forbidden" page
         })
     }
 

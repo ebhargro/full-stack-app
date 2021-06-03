@@ -13,13 +13,14 @@ export default class UpdateCourse extends Component {
       };
 
     componentDidMount(){
-      const {context} = this.props;
+      const context = this.props.context;
+      console.log(context);
       const authUser = context.authenticatedUser;
       const id = this.props.match.params.id;
 
       context.data.getCourse(id)
         .then((course) => {
-          console.log(id);
+          // console.log(id);
           this.setState({
             title: course.title,
             description: course.description,
@@ -27,6 +28,7 @@ export default class UpdateCourse extends Component {
             estimatedTime: course.estimatedTime,
             user: course.User
           })
+          console.log(course.User);
           if (authUser.id) {
             this.props.history.push('/notfound');
           }
@@ -85,7 +87,7 @@ export default class UpdateCourse extends Component {
                       id="estimatedTime" 
                       name="estimatedTime"
                       type="text"
-                      value={estimatedTime} 
+                      value={estimatedTime ? estimatedTime : 'N/A'}
                       onChange={this.change} 
                       placeholder="Estimated Time" />    
                       </label>
@@ -94,7 +96,7 @@ export default class UpdateCourse extends Component {
                       id="materialsNeeded" 
                       name="materialsNeeded"
                       type="text"
-                      value={materialsNeeded} 
+                      value={materialsNeeded ? materialsNeeded : 'N/A'}
                       onChange={this.change} 
                       placeholder="Materials Needed" />    
                       </label>                  
@@ -125,8 +127,8 @@ export default class UpdateCourse extends Component {
     
         context.data.updateCourse(id, course, authUser.emailAddress, authUser.password)
           .then(errors => {
-            console.log(id);
-            if (errors) {
+            // console.log(id);
+            if (errors.length) {
               this.setState({errors});
             } else {
               const id = this.props.match.params.id;
@@ -136,7 +138,8 @@ export default class UpdateCourse extends Component {
           })
           .catch((error) => {
             console.error(error);
-            this.props.history.push('/error');
+            this.props.history.push('/forbidden');
+
           });
       }
     
