@@ -1,6 +1,6 @@
 //Treehouse Techdegree Unit 10 Project
 // Ebony Hargro
-// Aiming for: Meets Expectations
+// Aiming for: Exceeds Expectations
 // import statements for all components and modules
 
 import './App.css';
