@@ -55,11 +55,15 @@ export default class CourseDetail extends Component {
                 </div>
                 <div className="wrap">
                     <h2> Course Detail </h2>
+                    <form>
+                    <div className="main--flex">
                     <div>
                         <h3 className="course--detail--title" >Course</h3>
                         <h4 className="course--name">{course.title}</h4>
                         <p> By {user.firstName} {user.lastName} </p>
                         <ReactMarkdown children={course.description}/>
+                        </div>
+                        <div>
                         <h3 className="course--detail--title"> Estimated Time </h3>
                         {
                             (course.estimatedTime === null || course.estimatedTime === '')
@@ -77,6 +81,8 @@ export default class CourseDetail extends Component {
                         <ReactMarkdown children={course.materialsNeeded}/>
                         }
                     </div>
+                    </div>
+                    </form>
                 </div>
             </React.Fragment>
         )

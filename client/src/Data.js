@@ -107,7 +107,7 @@ export default class Data {
     // tests if responde code indicates that the server cannot process the request and returns an error
     else if (response.status === 400) {
       return response.json().then(data => {
-        return data.errors;
+        return data;
       });
     }
     else {

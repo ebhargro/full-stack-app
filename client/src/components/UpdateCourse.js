@@ -52,7 +52,7 @@ export default class UpdateCourse extends Component {
     
         return (
           <div className="wrap">
-              <h1>Update Course</h1>
+              <h2>Update Course</h2>
               <Form 
                 cancel={this.cancel}
                 errors={errors}
@@ -71,7 +71,7 @@ export default class UpdateCourse extends Component {
                       </label>
                       <p> By {user.firstName} {user.lastName} </p>
                     <label> Description 
-                    <input 
+                    <textarea 
                       id="description" 
                       name="description"
                       type="text"
@@ -89,7 +89,7 @@ export default class UpdateCourse extends Component {
                       placeholder="Estimated Time" />    
                       </label>
                       <label> Materials Needed 
-                    <input 
+                    <textarea 
                       id="materialsNeeded" 
                       name="materialsNeeded"
                       type="text"

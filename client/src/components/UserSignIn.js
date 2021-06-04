@@ -74,7 +74,7 @@ export default class UserSignIn extends Component {
       .then(user => {
         if (user === null) {
           this.setState(() => {
-            return { errors: [ 'Sign-in was unsuccessful' ] };
+            return { errors: [ 'Sign-in was unsuccessful, your account does not exist.' ] };
           });
           //If user exists, sign in is successful and the user is redirected to the Course List page
           

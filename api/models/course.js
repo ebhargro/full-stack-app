@@ -24,14 +24,14 @@ const { Model, DataTypes, ConnectionRefusedError } = require('sequelize');
                 allowNull: false,
                 validate: {
                   notEmpty: {
-                    msg: 'Please enter a title, this field cannot be left blank.'
+                    msg: 'Please enter a course title, this field cannot be left blank.'
                   }
                 }},
         description: {type: DataTypes.TEXT,
                 allowNull: false,
                 validate: {
                 notEmpty: {
-                  msg: 'Please enter an author name, this field cannot be left blank.'
+                  msg: 'Please enter a course description, this field cannot be left blank.'
                 }
               } },
         estimatedTime: DataTypes.STRING,
