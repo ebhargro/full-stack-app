@@ -49,9 +49,6 @@ export default class UpdateCourse extends Component {
           user,
           errors,
         } = this.state;
-
-        const {context} = this.props;
-        const authUser = context.authenticatedUser;
     
         return (
           <div className="wrap">

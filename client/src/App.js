@@ -37,7 +37,7 @@ const CreateCourseWithContext = withContext(CreateCourse);
 const UpdateCourseWithContext = withContext(UpdateCourse);
 
 
-export default () => (
+const App = () => (
   <Router>
     <div>
       <HeaderWithContext />
@@ -55,5 +55,8 @@ export default () => (
       </Switch>
     </div>
   </Router>
-);
+)
+
+export default App;
+;
   
