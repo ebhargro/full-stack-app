@@ -8,7 +8,7 @@ export default class UserSignIn extends Component {
     password: '',
     errors: [],
   }
-
+//Renders a sign-in form so that user can become authorized and access the full site 
   render() {
     const {
       emailAddress,
@@ -18,8 +18,7 @@ export default class UserSignIn extends Component {
 
     return (
       <div className="form--centered">
-        <div className="grid-33 centered signin">
-          <h1>Sign In</h1>
+          <h2>Sign In</h2>
           <Form 
             cancel={this.cancel}
             errors={errors}
@@ -27,7 +26,7 @@ export default class UserSignIn extends Component {
             submitButtonText="Sign In"
             elements={() => (
               <React.Fragment>
-              <label> Email
+              <label> Email Address
                 <input 
                   id="emailAddress" 
                   name="emailAddress" 
@@ -51,7 +50,6 @@ export default class UserSignIn extends Component {
             Don't have a user account? Click here to <Link to="/signup">sign up!</Link>
           </p>
         </div>
-      </div>
     );
   }
 
@@ -65,6 +63,7 @@ export default class UserSignIn extends Component {
       };
     });
   }
+//Calls the 'signIn' action from Context.js
 
   submit = () => {
     const { context } = this.props;
@@ -77,6 +76,8 @@ export default class UserSignIn extends Component {
           this.setState(() => {
             return { errors: [ 'Sign-in was unsuccessful' ] };
           });
+          //If user exists, sign in is successful and the user is redirected to the Course List page
+          
         } else {
           this.props.history.push(from);
           console.log(`Sign-in successful for ${emailAddress}!`)

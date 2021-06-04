@@ -28,7 +28,7 @@ exports.authenticateUser = async (req, res, next) => {
             message = `Authentication failed for: ${user.firstName} ${user.lastName}`;
         }
         } else {
-            message = `User ${user.firstName} ${user.lastName} not found.`;
+            message = `User not found.`;
         }
         } else {
             message = 'Authorization header not found.';

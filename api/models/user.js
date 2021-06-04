@@ -19,15 +19,15 @@ const bcrypt = require('bcryptjs');
         firstName: {type: DataTypes.STRING, 
                 allowNull: false,
                 validate: {
-                  notEmpty: {
+                  notNull: {
                     msg: 'Please enter a first name, this field cannot be left blank.'
                   }
                 }},
         lastName: {type: DataTypes.STRING,
                 allowNull: false,
               validate: {
-                notEmpty: {
-                  msg: 'Please enter an lasr name, this field cannot be left blank.'
+                notNull: {
+                  msg: 'Please enter a last name, this field cannot be left blank.'
                 }
               } },
         emailAddress: { type: DataTypes.STRING,

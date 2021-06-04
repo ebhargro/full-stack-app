@@ -4,7 +4,8 @@ import Form from './Form';
 
 export default class UserSignUp extends Component {
   state = {
-    name: '',
+    firstName: '',
+    lastName: '',
     emailAddress: '',
     password: '',
     errors: [],
@@ -12,16 +13,17 @@ export default class UserSignUp extends Component {
 
   render() {
     const {
-      name,
+      firstName,
+      lastName,
       emailAddress,
       password,
       errors,
     } = this.state;
 
     return (
-      <div className="bounds">
+      <div className="form--centered">
         <div className="grid-33 centered signin">
-          <h1>Sign Up</h1>
+          <h2>Sign Up</h2>
           <Form 
             cancel={this.cancel}
             errors={errors}
@@ -30,19 +32,26 @@ export default class UserSignUp extends Component {
             elements={() => (
               <React.Fragment>
                 <input 
-                  id="name" 
-                  name="name" 
+                  id="firstName" 
+                  name="firstName" 
                   type="text"
-                  value={name} 
+                  value={firstName} 
                   onChange={this.change} 
-                  placeholder="Name" />
+                  placeholder="First Name" />
+                  <input 
+                  id="lastName" 
+                  name="lastName" 
+                  type="text"
+                  value={lastName} 
+                  onChange={this.change} 
+                  placeholder="Last Name" />
                 <input 
                   id="emailAddress" 
                   name="emailAddress" 
                   type="text"
                   value={emailAddress} 
                   onChange={this.change} 
-                  placeholder="Email" />
+                  placeholder="Email Address" />
                 <input 
                   id="password" 
                   name="password"
@@ -50,6 +59,13 @@ export default class UserSignUp extends Component {
                   value={password} 
                   onChange={this.change} 
                   placeholder="Password" />
+                  <input 
+                  id="confirmPassword" 
+                  name="confirmPassword"
+                  type="password"
+                  value={password} 
+                  onChange={this.change} 
+                  placeholder="Confirm Password" />
               </React.Fragment>
             )} />
           <p>

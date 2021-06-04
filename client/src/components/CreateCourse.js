@@ -25,10 +25,7 @@ export default class CreateCourse extends Component {
     
         return (
           <div className="wrap">
-              <h1>Create A Course</h1>
-              {/* <div className="validation--errors">
-                <h3> Validation Errors </h3>
-              </div> */}
+              <h2>Create Course</h2>
               <Form 
                 cancel={this.cancel}
                 errors={errors}
