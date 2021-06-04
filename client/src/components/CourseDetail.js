@@ -98,7 +98,7 @@ export default class CourseDetail extends Component {
         const id = this.props.match.params.id;
         context.data.deleteCourse(id, authUser.emailAddress, authUser.password)
         .then(errors => {
-            if(errors){
+            if(errors.length){
                 this.setState({errors})
             } else {
                 console.log('Hooray! Course deleted.');
@@ -107,7 +107,7 @@ export default class CourseDetail extends Component {
         })
         .catch(error => {
             console.log(error);
-            this.props.history.push('/forbidden'); // sends user to "Forbidden" page
+            this.props.history.push('/error'); // sends user to "Error" page
         })
     }
 
