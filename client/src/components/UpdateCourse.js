@@ -12,13 +12,13 @@ export default class UpdateCourse extends Component {
         id: ''
       };
 
-    componentDidMount(){
+    async componentDidMount(){
       const context = this.props.context;
       console.log(context);
       const authUser = context.authenticatedUser;
       const id = this.props.match.params.id;
 
-      context.data.getCourse(id)
+      await context.data.getCourse(id)
         .then((course) => {
           // console.log(id);
           this.setState({
@@ -29,14 +29,23 @@ export default class UpdateCourse extends Component {
             user: course.User
           })
           console.log(course.User);
-          if (authUser.id) {
-            this.props.history.push('/notfound');
+          if (authUser.userId !== this.state.user.id) {
+            this.props.history.push('/forbidden');
           }
         })
         .catch(error => {
-          this.props.history.push('/error');
-          console.log(`Error: unable to retrieve course ${error}.`)
+          console.log(error);
+          if(error.message === "Course Not Found."){
+            this.props.history.push('/notfound');
+          } else {
+            this.props.history.push('/error');
+            console.log(`Error: unable to retrieve course.`)
+          }
         })
+
+        if(this.state.user === null) {
+          this.props.history.push('/signin')
+        }
     }
     
     
@@ -135,7 +144,7 @@ export default class UpdateCourse extends Component {
           })
           .catch((error) => {
             console.error(error);
-            this.props.history.push('/forbidden');
+            this.props.history.push('/error');
 
           });
       }

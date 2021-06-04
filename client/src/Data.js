@@ -89,8 +89,8 @@ export default class Data {
     if (response.status === 200) {
       return response.json().then(data => data);
       // if the status response code indicates that the request lacks valid authentication credentials, null is returned
-    } else if (response.status === 401) {
-      return null;
+    } else if (response.status === 404) {
+      throw new Error("Course Not Found.");
     }
     else {
       throw new Error();

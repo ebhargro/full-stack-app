@@ -38,18 +38,22 @@ export default class CourseDetail extends Component {
                     <div className="wrap">
                         {
                             //if the user is authorized, display "Update", "Delete", and "Return to List" buttons
-                            (authUser)
+                            authUser
                         ?
+                            ((authUser.userId === user.id) ? (
                         <React.Fragment>
                             <Link className="button" to={`/courses/${course.id}/update`}> Update Course </Link>
                             <Link className="button" to="/" onClick={() => this.deleteCourse()}> Delete Course </Link>
                             <Link className="button button-secondary" to="/"> Return to List </Link>
                         </React.Fragment>
+                        )
                         // if user is not authorized, display only "Back" button
                         :
                         <React.Fragment>
                             <Link className="button" to="/"> Return to List </Link>
-                        </React.Fragment>
+                        </React.Fragment> ) : <React.Fragment>
+                            <Link className="button" to="/"> Return to List </Link>
+                        </React.Fragment> 
                         }
                     </div>
                 </div>
