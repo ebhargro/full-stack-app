@@ -69,6 +69,8 @@ export default class UpdateCourse extends Component {
                 submitButtonText="Update Course"
                 elements={() => (
                   <React.Fragment>
+                  <div className="main--flex">
+                  <div>
                   <label> Course Title
                     <input 
                       id="title" 
@@ -87,7 +89,9 @@ export default class UpdateCourse extends Component {
                       value={description} 
                       onChange={this.change} 
                       placeholder="Description" />    
-                      </label>
+                      </label>   
+                  </div>
+                  <div> 
                       <label> Estimated Time 
                     <input 
                       id="estimatedTime" 
@@ -105,7 +109,9 @@ export default class UpdateCourse extends Component {
                       value={materialsNeeded ? materialsNeeded : 'N/A'}
                       onChange={this.change} 
                       placeholder="Materials Needed" />    
-                      </label>                  
+                      </label> 
+                      </div> 
+                      </div>                
                   </React.Fragment>
                 )} />
             </div>
