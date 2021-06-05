@@ -21,6 +21,9 @@ const bcrypt = require('bcryptjs');
                 validate: {
                   notNull: {
                     msg: 'Please enter a first name, this field cannot be left blank.'
+                  },
+                  notEmpty:{
+                    msg: 'Please enter a first name.'
                   }
                 }},
         lastName: {type: DataTypes.STRING,
@@ -28,6 +31,9 @@ const bcrypt = require('bcryptjs');
               validate: {
                 notNull: {
                   msg: 'Please enter a last name, this field cannot be left blank.'
+                },
+                notEmpty: {
+                  msg: 'Please enter a last name.'
                 }
               } },
         emailAddress: { type: DataTypes.STRING,

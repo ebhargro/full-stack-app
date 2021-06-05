@@ -22,8 +22,8 @@ function asyncHandler(cb) {
 
 //Adding in User Routes
 //Route that returns the current authenticated user formatted as JSON
-router.get('/', authenticateUser, asyncHandler(async(req, res) => {
-    const user = req.currentUser;
+router.get('/', authenticateUser, asyncHandler(async(req, res) => {  
+  const user = req.currentUser;
     res.json({
         firstName: user.firstName,
         lastName: user.lastName,

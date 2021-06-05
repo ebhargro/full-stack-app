@@ -102,7 +102,8 @@ export default class CourseDetail extends Component {
                 this.setState({errors})
             } else {
                 console.log('Hooray! Course deleted.');
-                this.props.history.push('/'); // returns user to Course list page
+                this.props.history.push('/');
+                window.location.reload(true); // returns user to Course list page
             }
         })
         .catch(error => {

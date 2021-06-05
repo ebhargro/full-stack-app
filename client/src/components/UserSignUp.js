@@ -90,27 +90,35 @@ export default class UserSignUp extends Component {
   submit = () => {
     const { context } = this.props;
     const {
-      name,
+      firstName,
+      lastName,
       emailAddress,
       password,
     } = this.state;
 
-    // Create user if no errors exist 
+    // Creates user if no errors exist 
     const user = {
-      name,
+      firstName,
+      lastName,
       emailAddress,
       password,
     };
 
     context.data.createUser(user)
-      .then( errors => {
+      .then(errors => {
         if (errors.length) {
           this.setState({ errors });
+          console.log(errors)
         } else {
           context.actions.signIn(emailAddress, password)
             .then(() => {
+              console.log(`${emailAddress} created as a new user!`);
               this.props.history.push('/');    
-            });
+            })
+          .catch(error => {
+            console.log(error);
+            this.props.history.push('/error');
+          })
         }
       })
       .catch((err) => {
